@@ -1,0 +1,91 @@
+- type: entity
+  id: MedicalDummyBase
+  abstract: true
+  components:
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: LagCompensation
+  - type: Actions
+  - type: Alerts
+  - type: Appearance
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: DoAfter
+  - type: Examiner
+  - type: Eye
+  - type: ContentEye
+  - type: CameraRecoil
+  - type: MindContainer
+  - type: Polymorphable
+  - type: StatusIcon
+  - type: HumanoidAppearance
+    species: Human
+  - type: Buckle
+  - type: Speech
+    speechSounds: Alto
+  - type: Emoting
+  - type: BodyEmotes
+    soundsId: GeneralBodyEmotes
+  - type: Grammar
+    attributes:
+      proper: true
+
+- type: entity
+  parent:
+  - MedicalDummyBase
+  - MobDamageable
+  - MobRespirator
+  - MobBloodstream
+  - MobAtmosStandard
+  - MobFlammable
+  name: medical training dummy
+  id: MedicalTrainingDummy
+  components:
+  - type: Sprite
+    sprite: Mobs/Species/Human/parts.rsi
+    state: full
+    noRot: true
+    drawdepth: Mobs
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0
+    baseSprintSpeed: 0
+    walkSpeedModifier: 0
+    sprintSpeedModifier: 0
+  - type: DamageVisuals
+    thresholds: [ 20, 40, 100 ]
+    targetLayers:
+    - "enum.HumanoidVisualLayers.Chest"
+    - "enum.HumanoidVisualLayers.Head"
+    - "enum.HumanoidVisualLayers.LArm"
+    - "enum.HumanoidVisualLayers.LLeg"
+    - "enum.HumanoidVisualLayers.RArm"
+    - "enum.HumanoidVisualLayers.RLeg"
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#FF0000"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.CreamPiedVisuals.Creamed:
+        clownedon: # Not 'creampied' bc I can already see Skyrat complaining about conflicts.
+          True: {visible: true}
+          False: {visible: false}
